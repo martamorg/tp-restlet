@@ -58,8 +58,6 @@ public class InMemoryDatabase
         return users_.get(id);
     }
     
-	/*
-	 * public Collection<Tweet> getTweets(int userId) { return users_. //pensar }
-	 */
+	//createTweet ??? 
 
 }

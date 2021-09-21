@@ -30,6 +30,8 @@ public class MyTwitterApplication extends Application
         router.attach("/users", UsersResource.class);
         router.attach("/users/{userId}", UserResource.class);
         router.attach("/users/{userId}/tweets", TweetsResource.class);
+        router.attach("/user/tweets", TweetsResource.class);
+
 
         return router;
     }

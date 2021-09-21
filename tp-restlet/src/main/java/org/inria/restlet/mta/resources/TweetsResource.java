@@ -18,6 +18,10 @@ import org.restlet.resource.Post;
 import org.restlet.resource.ServerResource;
 
 
+/**
+ * @author Usuario
+ *
+ */
 public class TweetsResource extends ServerResource {
 	
 	   /** Backend.*/
@@ -75,6 +79,7 @@ public class TweetsResource extends ServerResource {
 
    }
    
+   
    @Post("json")
    public Representation createTweet(JsonRepresentation representation)
        throws Exception
@@ -105,6 +110,33 @@ public class TweetsResource extends ServerResource {
        JsonRepresentation result = new JsonRepresentation(resultObject);
        return result;
    }
+   
+   
+   
+	/*
+	 * @Get("json") public Representation getAllTweets() throws JSONException {
+	 * Collection<User> users = backend_.getDatabase().getUsers();
+	 * Collection<JSONObject> jsonTweets = new ArrayList<JSONObject>();
+	 * ArrayList<Tweet> tweets = new ArrayList<Tweet>();
+	 * 
+	 * for (User user : users) {
+	 * 
+	 * ArrayList<Tweet> tweetsi = user.getTweets();
+	 * 
+	 * if (tweetsi != null) { for (Tweet tweet : tweets) { JSONObject current = new
+	 * JSONObject(); current.put("tweet", tweet.getTweetCont());
+	 * jsonTweets.add(current);
+	 * 
+	 * } }
+	 * 
+	 * 
+	 * }
+	 * 
+	 * JSONArray jsonArray = new JSONArray(jsonTweets); return new
+	 * JsonRepresentation(jsonArray);
+	 * 
+	 * }
+	 */
 
 
 }

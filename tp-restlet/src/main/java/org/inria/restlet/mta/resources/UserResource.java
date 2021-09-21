@@ -1,15 +1,19 @@
 package org.inria.restlet.mta.resources;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.inria.restlet.mta.backend.Backend;
 import org.inria.restlet.mta.internals.Tweet;
 import org.inria.restlet.mta.internals.User;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
-
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
+import org.restlet.resource.Delete;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
 import org.restlet.resource.ServerResource;
@@ -58,6 +62,33 @@ public class UserResource extends ServerResource
 
         return new JsonRepresentation(userObject);
     }
+    
+    @Delete
+    public Representation deleteUser() throws Exception {
+    	
+        String userIdString = (String) getRequest().getAttributes().get("userId");
+        int userId = Integer.valueOf(userIdString);
+        user_ = backend_.getDatabase().getUser(userId);
+        Collection<User> users = backend_.getDatabase().getUsers();
+        users.remove(user_);
+        
+        Collection<JSONObject> jsonUsers = new ArrayList<JSONObject>();
+
+        for (User user : users)
+        {
+            JSONObject current = new JSONObject();
+            current.put("id", user.getId());
+            current.put("name", user.getName());
+            current.put("url", getReference() + "/" + user.getId());
+            jsonUsers.add(current);
+
+        }
+        JSONArray jsonArray = new JSONArray(jsonUsers);
+        return new JsonRepresentation(jsonArray);
+
+
+    }
+
     
 
 
